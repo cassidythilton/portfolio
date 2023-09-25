@@ -1,0 +1,456 @@
+{
+  "inference_mapping_index": 766,
+  "deployment": "databr_eval_9fafca2_gi_plch",
+  "model_name": "databr_eval_9fafca2_gi_plch",
+  "model_version": "1",
+  "model_stage": "primary",
+        "connection": "clickhouse://clickhouse:9000/default?send_receive_timeout=300000&use_numpy=true&columnar=true",
+    "inferencestore_connection": "postgresql://postgres:Welcome123!@postgresql/inferencestore",
+    
+  "df_schema": {
+    "target_col": "tx_fraud",
+    "identifier_cols": [
+      "tx_id"
+    ],
+    "columns": [
+      {
+        "feature_id": 1,
+        "name": "customer_id",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 2,
+        "name": "terminal_id",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 3,
+        "name": "tx_amount",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 4,
+        "name": "tx_fraud",
+        "dtype": "bool",
+        "sql_type": "Boolean",
+        "feature_type": "categorical",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": true,
+        "rca": [
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 5,
+        "name": "tx_fraud_scenario",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 6,
+        "name": "tx_during_weekend",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 7,
+        "name": "tx_during_night",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 8,
+        "name": "customer_id_nb_tx_1day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 9,
+        "name": "customer_id_avg_amount_1day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 10,
+        "name": "customer_id_nb_tx_7day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 11,
+        "name": "customer_id_avg_amount_7day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 12,
+        "name": "customer_id_nb_tx_30day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 13,
+        "name": "customer_id_avg_amount_30day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 14,
+        "name": "terminal_id_nb_tx_1day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 15,
+        "name": "terminal_id_risk_1day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 16,
+        "name": "terminal_id_nb_tx_7day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 17,
+        "name": "terminal_id_risk_7day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 18,
+        "name": "terminal_id_nb_tx_30day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 19,
+        "name": "terminal_id_risk_30day_window",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 20,
+        "name": "tx_fraud_pred_proba",
+        "dtype": "float64",
+        "sql_type": "Float32",
+        "feature_type": "continuous",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": false,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 21,
+        "name": "tx_id",
+        "dtype": "object",
+        "sql_type": "text",
+        "feature_type": "categorical",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": true,
+        "rca": [
+          "tx_fraud",
+          "transaction_cat",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 22,
+        "name": "transaction_cat",
+        "dtype": "object",
+        "sql_type": "text",
+        "feature_type": "categorical",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": true,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_subcat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 23,
+        "name": "transaction_subcat",
+        "dtype": "object",
+        "sql_type": "text",
+        "feature_type": "categorical",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": true,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subsubcat"
+        ]
+      },
+      {
+        "feature_id": 24,
+        "name": "transaction_subsubcat",
+        "dtype": "object",
+        "sql_type": "text",
+        "feature_type": "categorical",
+        "segmentation": true,
+        "drift": true,
+        "hotspot": true,
+        "rca": [
+          "tx_fraud",
+          "tx_id",
+          "transaction_cat",
+          "transaction_subcat"
+        ]
+      },
+      {
+        "feature_id": 25,
+        "name": "tx_datetime",
+        "dtype": "datetime64[ns]",
+        "sql_type": "",
+        "feature_type": "unknown",
+        "segmentation": false,
+        "drift": false,
+        "hotspot": false,
+        "rca": []
+      }
+    ],
+    "datetime_col": "tx_datetime",
+    "predict_proba_col": "tx_fraud_pred_proba"
+  },
+  "inference_table": "1690085223554_dit",
+  "ground_truth_table": "1690085223554_gt",
+  "joined_table": "1690085223554_joined",
+  "key_table": "1690085223554_key",
+  "postprocessors": [],
+  "segments": [
+    {
+      "segment_id": 48,
+      "condition": "transaction_cat in ('Banking')",
+      "description": "Segment to filter data on ['Banking']"
+    },
+    {
+      "segment_id": 49,
+      "condition": "transaction_cat in ('Investment Accounts)",
+      "description": "Segment to filter data on ['Investment Accounts']"
+    },
+    {
+      "segment_id": 50,
+      "condition": "transaction_cat in ('Insurance')",
+      "description": "Segment to filter data on ['Insurance']"
+    }
+  ]
+}
