@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/cassidyhilton/Documents/Vian_Notebooks_Pers/portfolio/po002_hou/mlruns/759910293775776492/f4335ef0ce2441c1ad367983d3f85ef9/artifacts
+end_time: 1696776707129
+entry_point_name: ''
+experiment_id: '759910293775776492'
+lifecycle_stage: active
+run_id: f4335ef0ce2441c1ad367983d3f85ef9
+run_name: shivering-fly-903
+run_uuid: f4335ef0ce2441c1ad367983d3f85ef9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1696776706917
+status: 3
+tags: []
+user_id: cassidyhilton
