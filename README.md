@@ -150,25 +150,23 @@ async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float
 
 ```
 
-<div style="text-align:center">
-    <img src="https://drive.google.com/uc?export=view&id=1HUa6tvprIA1NXmuNfCGP4v1e9WCIRQmZ">
-<br>
-</div>
-
-Results
-The model performs exceptionally well in predicting home prices. It significantly simplifies the home valuation process, providing both buyers and sellers with a reliable, automated solution.
+### FastAPI
+FastAPI is a modern, high-performance web framework for building APIs with Python. In this home pricing prediction solution, FastAPI serves as the backbone for managing all API calls, specifically for handling prediction requests. When the Streamlit app gathers information about a property, such as square footage, number of bedrooms, and an image, it sends this data to a FastAPI endpoint. The endpoint then invokes the underlying machine learning model, which consists of a Convolutional Neural Network (CNN) for image analysis and a Multilayer Perceptron (MLP) for numerical data processing. The FastAPI application ensures that these operations are executed in a fast, efficient, and secure manner. Its benefits include automatic generation of OpenAPI documentation, validation of incoming requests, and support for concurrent handling of multiple requests, making it an ideal choice for building robust and scalable machine learning APIs.
 
 <div style="text-align:center">
-    <img src="https://drive.google.com/uc?export=view&id=1KhJY0O5iFozWcyB0GAMYReffkohZyJBn">
-<br>
+    <img src="https://drive.google.com/uc?export=view&id=1HUa6tvprIA1NXmuNfCGP4v1e9WCIRQmZ" width="1000">
 </div>
 
-User Interface
-The Streamlit app provides an intuitive interface for users to input property details and obtain price predictions.
+### MLFlow
+MLflow plays a crucial role in the management and tracking of machine learning models in this solution. It is responsible for logging various aspects of the model such as parameters, metrics, and artifacts. When the home price prediction model is trained using the Jupyter Notebook, metrics like accuracy, loss, and other performance indicators are logged into MLflow. These logs serve as an invaluable resource for understanding model behavior, debugging, and iterative development. MLflow's user interface also allows for the easy comparison of different model versions, thus assisting in model selection. The artifact logging feature is particularly beneficial for keeping track of the trained models, making it straightforward to roll back to a previous model version if needed. Overall, MLflow enhances the traceability and reproducibility of machine learning projects.
+<div style="text-align:center">
+    <img src="https://drive.google.com/uc?export=view&id=1KhJY0O5iFozWcyB0GAMYReffkohZyJBn" width="1000">
+</div>
 
-
+### Streamlit
+Streamlit serves as the front-end interface for this solution, creating an intuitive environment for users to engage with the machine learning model. Users can easily input property-specific details such as square footage and the number of bathrooms, as well as upload images for more accurate predictions. These inputs are seamlessly routed to the FastAPI backend for processing. An additional feature of this application is its ability to not only predict the value of a property but also present data on four comparable homes, offering extra context to the estimated price. While Flask is often considered more robust for large-scale applications requiring complex customization, Streamlit excels in situations where rapid development and ease of use are prioritized. Its straightforward widgetry and compatibility with other technologies like FastAPI make it a highly effective tool for crafting user interfaces in machine learning projects.
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=aRKG4wpDd1k"><img src="https://drive.google.com/uc?export=view&id=1zr4rpN_X3rO8v0cTuvJVE7AaucRy2ZpW" width="1000"></a>
+  <a href="(https://drive.google.com/file/d/10pAADAGK6zB5AoUJNpA6uW9xLwWK6xdL/view?t=3s)"><img src="https://drive.google.com/uc?export=view&id=1QaASEvndCqhkSg1O0qaSh7s_tnfiWs7Y" width="1000"></a>
 </div>
 
 ### Conclusion
