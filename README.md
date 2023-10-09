@@ -155,15 +155,19 @@ async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float
 <br>
 </div>
 Results
-The model performs exceptionally well in predicting home prices, with an accuracy rate of XX%. It significantly simplifies the home valuation process, providing both buyers and sellers with a reliable, automated solution.
+The model performs exceptionally well in predicting home prices. It significantly simplifies the home valuation process, providing both buyers and sellers with a reliable, automated solution.
 
+<div style="text-align:center">
+    <img src="https://drive.google.com/uc?export=view&id=1KhJY0O5iFozWcyB0GAMYReffkohZyJBn">
+<br>
+</div>
 
 User Interface
 The Streamlit app provides an intuitive interface for users to input property details and obtain price predictions.
 
-<div align="center">
-  <img src="https://media.giphy.com/media/C4zovVWcubvcqFYQO3/giphy.gif" width="1000">
-</div>
+<div style="text-align:center">
+    <img src="https://drive.google.com/uc?export=view&id=1-KSVl2mHchm9yTQ4vNCaH4Ltl_AZNGTs">
+<br>
 
 ### Conclusion
 The po002_hou project successfully employs machine learning techniques, specifically neural networks, to automate and optimize home price predictions. This approach not only increases efficiency but also adds a layer of objectivity to the valuation process.
