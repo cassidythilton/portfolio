@@ -26,7 +26,7 @@ Manual generation of model risk management reports can be labor-intensive and er
 ### Solution Approach
 
 This project employs a pipeline where text requests from a model risk management report template are processed as queries or function calls. These queries fetch required variables, which are then summarized by ChatGPT-4. The project is comprised of notebook `AutoRiskReport_FinancialServices.ipynb` and helper file `helperMRM.py`. The notebook serves as the front end for the user whereas the helper file serves as the back end. The user will provide an MRM template with requests for specific information to be automated into individual sections (e.g. _"analyze model performance metrics for the current ended quarter (2023-01-01 to 2023-03-31) comparing to the prior ended quarter (2022-10-01 to 2022-12-31)"._ The solution reads and parses each request and then performs the appropriate tasks to accomodate each request. Finally, once complete an "out" file is rendered in the same `src` location as the template files. 
-<br>
+
 <div style="text-align:center">
     <img src="https://drive.google.com/uc?export=view&id=1P-eHM2_z1wHfrq-WQEb3Z9gTyW2h52c6">
 <br>
