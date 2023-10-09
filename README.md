@@ -149,6 +149,7 @@ async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float
 
 ```
 
+
 ### FastAPI
 FastAPI is a modern, high-performance web framework for building APIs with Python. In this home pricing prediction solution, FastAPI serves as the backbone for managing all API calls, specifically for handling prediction requests. When the Streamlit app gathers information about a property, such as square footage, number of bedrooms, and an image, it sends this data to a FastAPI endpoint. The endpoint then invokes the underlying machine learning model, which consists of a Convolutional Neural Network (CNN) for image analysis and a Multilayer Perceptron (MLP) for numerical data processing. The FastAPI application ensures that these operations are executed in a fast, efficient, and secure manner. Its benefits include automatic generation of OpenAPI documentation, validation of incoming requests, and support for concurrent handling of multiple requests, making it an ideal choice for building robust and scalable machine learning APIs.
 
