@@ -130,8 +130,7 @@ The project employs a two-pronged approach combining image and numerical data to
 
 ### Code Sample: FastAPI Prediction Endpoint
 
-```
-python
+```python
 @app.post("/predict/")
 async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float = Form(...), sqft: float = Form(...), file: UploadFile = File(...)):
 
