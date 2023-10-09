@@ -9,7 +9,7 @@ This repository is a collection of projects showcasing my skills in Machine Lear
 ## Table of Contents
 
 1. [po001_mrm](#po001_mrm) ⸺ [🔗 Project Repo](https://github.com/cassidythilton/portfolio/tree/main/po001_mrm)
-2. [po001_mrm](#po002_hou) ⸺ [🔗 Project Repo](https://github.com/cassidythilton/portfolio/tree/main/po002_hou)
+2. [po002_hou](#po002_hou) ⸺ [🔗 Project Repo](https://github.com/cassidythilton/portfolio/tree/main/po002_hou)
 
 ---
 
