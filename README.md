@@ -137,7 +137,6 @@ async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float
     tabular_data = np.array([[n_citi, bed, bath, sqft]])
     tabular_data = tabular_data / np.array([citiM, bM, bathM, sqftM])  # Normalize like you did during training
 
-    # Read and preprocess the image
     image_data = await file.read()
     image = cv2.imdecode(np.frombuffer(image_data, np.uint8), -1)
     image = cv2.resize(image, (64, 64))
@@ -145,7 +144,7 @@ async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float
     image = np.expand_dims(image, axis=0)
     prediction = model.predict([tabular_data, image])
 
-    return {"prediction": float(prediction[0]*priceM)}  # Convert prediction to float or JSON serializable format
+    return {"prediction": float(prediction[0]*priceM)}  
 
 ```
 
