@@ -130,7 +130,8 @@ The project employs a two-pronged approach combining image and numerical data to
 
 ### Code Sample: FastAPI Prediction Endpoint
 
-```python
+```
+python
 @app.post("/predict/")
 async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float = Form(...), sqft: float = Form(...), file: UploadFile = File(...)):
 
@@ -143,7 +144,6 @@ async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float
     image = cv2.resize(image, (64, 64))
     image = image / 255.0
     image = np.expand_dims(image, axis=0)
-
     prediction = model.predict([tabular_data, image])
 
     return {"prediction": float(prediction[0]*priceM)}  # Convert prediction to float or JSON serializable format
@@ -154,6 +154,7 @@ async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float
     <img src="https://drive.google.com/uc?export=view&id=1HUa6tvprIA1NXmuNfCGP4v1e9WCIRQmZ">
 <br>
 </div>
+
 Results
 The model performs exceptionally well in predicting home prices. It significantly simplifies the home valuation process, providing both buyers and sellers with a reliable, automated solution.
 
@@ -165,9 +166,10 @@ The model performs exceptionally well in predicting home prices. It significantl
 User Interface
 The Streamlit app provides an intuitive interface for users to input property details and obtain price predictions.
 
-<div style="text-align:center">
-    <img src="https://drive.google.com/uc?export=view&id=1-KSVl2mHchm9yTQ4vNCaH4Ltl_AZNGTs">
-<br>
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=aRKG4wpDd1k"><img src="https://drive.google.com/uc?export=view&id=1zr4rpN_X3rO8v0cTuvJVE7AaucRy2ZpW" width="1000"></a>
+</div>
 
 ### Conclusion
 The po002_hou project successfully employs machine learning techniques, specifically neural networks, to automate and optimize home price predictions. This approach not only increases efficiency but also adds a layer of objectivity to the valuation process.
