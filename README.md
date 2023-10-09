@@ -166,7 +166,7 @@ MLflow plays a crucial role in the management and tracking of machine learning m
 ### Streamlit
 Streamlit serves as the front-end interface for this solution, creating an intuitive environment for users to engage with the machine learning model. Users can easily input property-specific details such as square footage and the number of bathrooms, as well as upload images for more accurate predictions. These inputs are seamlessly routed to the FastAPI backend for processing. An additional feature of this application is its ability to not only predict the value of a property but also present data on four comparable homes, offering extra context to the estimated price. While Flask is often considered more robust for large-scale applications requiring complex customization, Streamlit excels in situations where rapid development and ease of use are prioritized. Its straightforward widgetry and compatibility with other technologies like FastAPI make it a highly effective tool for crafting user interfaces in machine learning projects.
 <div align="center">
-  <a href="(https://drive.google.com/file/d/10pAADAGK6zB5AoUJNpA6uW9xLwWK6xdL/view?t=3s)"><img src="https://drive.google.com/uc?export=view&id=1QaASEvndCqhkSg1O0qaSh7s_tnfiWs7Y" width="700"></a>
+  <a href="(https://drive.google.com/file/d/10pAADAGK6zB5AoUJNpA6uW9xLwWK6xdL/view?t=3s)"><img src="https://drive.google.com/uc?export=view&id=10pAADAGK6zB5AoUJNpA6uW9xLwWK6xdL" width="700"></a>
 </div>
 
 ### Conclusion
