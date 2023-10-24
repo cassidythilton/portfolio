@@ -158,6 +158,7 @@ FastAPI is a modern, high-performance web framework for building APIs with Pytho
 
 ### MLFlow
 MLflow plays a crucial role in the management and tracking of machine learning models in this solution. It is responsible for logging various aspects of the model such as parameters, metrics, and artifacts. When the home price prediction model is trained using the Jupyter Notebook, metrics like accuracy, loss, and other performance indicators are logged into MLflow. These logs serve as an invaluable resource for understanding model behavior, debugging, and iterative development. MLflow's user interface also allows for the easy comparison of different model versions, thus assisting in model selection. The artifact logging feature is particularly beneficial for keeping track of the trained models, making it straightforward to roll back to a previous model version if needed. Overall, MLflow enhances the traceability and reproducibility of machine learning projects.
+
 <div style="text-align:center">
     <img src="https://drive.google.com/uc?export=view&id=1KhJY0O5iFozWcyB0GAMYReffkohZyJBn" width="1000">
 </div>
