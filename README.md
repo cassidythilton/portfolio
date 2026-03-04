@@ -25,25 +25,9 @@ MRM reports are a regulatory obligation under [SR 11-7](https://www.federalreser
 
 ### Solution Architecture
 
-```
-┌──────────────────┐     ┌────────────────┐     ┌──────────────────┐
-│  MRM Template    │────▸│  GPT-4 Task    │────▸│  MLOps Platform  │
-│  (HTML)          │     │  Router        │     │  API Queries     │
-└──────────────────┘     └────────────────┘     └──────────────────┘
-                                                        │
-                              ┌──────────────────────────┘
-                              ▼
-                     ┌────────────────┐     ┌──────────────────┐
-                     │  Metrics       │────▸│  GPT-4           │
-                     │  Aggregation   │     │  Summarization   │
-                     └────────────────┘     └──────────────────┘
-                                                    │
-                                                    ▼
-                                           ┌────────────────┐
-                                           │  Rendered MRM  │
-                                           │  Report (HTML) │
-                                           └────────────────┘
-```
+<div style="text-align:center">
+    <img src="https://drive.google.com/uc?export=view&id=1P-eHM2_z1wHfrq-WQEb3Z9gTyW2h52c6">
+</div>
 
 1. **Template Parsing** — The HTML-based MRM template contains annotated sections with natural-language requests (e.g., *"analyze model performance metrics for Q1 2023 vs. Q4 2022"*).
 2. **Task Routing** — GPT-4 with function calling identifies the correct analytical task (performance retrieval, drift detection, segment analysis, etc.) for each request.
@@ -79,29 +63,9 @@ Home valuation is traditionally subjective and time-consuming, relying heavily o
 
 ### Solution Architecture
 
-```
-┌──────────────────┐     ┌────────────────────────────────────┐
-│  Streamlit UI    │────▸│         FastAPI Backend             │
-│  (User Inputs)   │     │                                    │
-└──────────────────┘     │  ┌──────────┐    ┌──────────────┐  │
-                         │  │ CNN      │    │ MLP          │  │
-                         │  │ (Image)  │    │ (Numerical)  │  │
-                         │  └────┬─────┘    └──────┬───────┘  │
-                         │       └──────┬──────────┘          │
-                         │              ▼                     │
-                         │     ┌────────────────┐             │
-                         │     │  Merged Dense  │             │
-                         │     │  Layer → Price │             │
-                         │     └────────────────┘             │
-                         └────────────────────────────────────┘
-                                        │
-                                        ▼
-                              ┌──────────────────┐
-                              │  MLflow Tracking  │
-                              │  (Experiments,    │
-                              │   Artifacts)      │
-                              └──────────────────┘
-```
+<div style="text-align:center">
+    <img src="https://drive.google.com/uc?export=view&id=1PMdTgx-37RRg6Kp-cF5EkInkurxPbMKX">
+</div>
 
 1. **Image Branch (CNN)** — A 3-layer convolutional network (16 → 32 → 64 filters) processes 64×64 property images to extract visual features.
 2. **Numerical Branch (MLP)** — A 2-layer dense network processes normalized tabular features (city code, beds, baths, sqft).
@@ -117,6 +81,30 @@ Home valuation is traditionally subjective and time-consuming, relying heavily o
 | `str.py` | Streamlit application — user interface with image upload and comparable homes |
 | `helper.py` | Utility functions — data loading, model architecture definitions, visualization |
 | `src/homePrices.csv` | Training dataset — property attributes and prices |
+
+### FastAPI
+
+FastAPI serves as the inference backbone, handling prediction requests asynchronously. The Streamlit front end sends property data and images to a FastAPI endpoint, which invokes the dual-branch neural network and returns the price estimate. FastAPI provides automatic OpenAPI documentation, request validation, and concurrent request handling.
+
+<div style="text-align:center">
+    <img src="https://drive.google.com/uc?export=view&id=1HUa6tvprIA1NXmuNfCGP4v1e9WCIRQmZ" width="1000">
+</div>
+
+### MLflow
+
+MLflow tracks all training experiments—logging parameters (epochs, batch size), metrics (loss, val_loss), and model artifacts. This enables comparison across training runs and straightforward rollback to prior model versions.
+
+<div style="text-align:center">
+    <img src="https://drive.google.com/uc?export=view&id=1KhJY0O5iFozWcyB0GAMYReffkohZyJBn" width="1000">
+</div>
+
+### Streamlit
+
+Streamlit provides the user-facing interface for property valuation. Users input property details and upload an image; the app routes inputs to FastAPI, displays the predicted price, and surfaces four comparable homes for additional context.
+
+<div align="center">
+  <a href="https://drive.google.com/file/d/10pAADAGK6zB5AoUJNpA6uW9xLwWK6xdL/view?t=3s"><img src="https://drive.google.com/uc?export=view&id=1QaASEvndCqhkSg1O0qaSh7s_tnfiWs7Y" width="700"></a>
+</div>
 
 ### Technologies
 
