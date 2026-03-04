@@ -922,7 +922,7 @@ def generateMRMmetricsCustom(token, cluster, modelname, model_version, additiona
 
 def getDatabricksModelDescription(cluster, token):
     WEBSERVICES_URL = f"https://webservices.{cluster}"
-    url = f"{WEBSERVICES_URL}/v1/v_config/getValue?system=acme&module=databricks&name=connection_info"
+    url = f"{WEBSERVICES_URL}/v1/v_config/getValue?system=platform&module=databricks&name=connection_info"
 
     payload={}
     headers = {"Authorization": "Bearer " + token, "Content-Type": "application/json"}
@@ -2286,7 +2286,7 @@ def generate_metrics(token,cluster,modeluuid,policyName,request,i,additional_met
         df = pH[metrics_columns]
         datetime_column = 'formatted_predict_date'
     elif 'feature drift' in request:
-        print(f"   ...querying ACME drift detection endpoint")        
+        print(f"   ...querying platform drift detection endpoint")        
         df_type = 'driftHist'
         df = get_drift_hist(modeluuid, token, cluster, policyName)
         display(df.head())
@@ -2422,7 +2422,7 @@ def generate_metrics_opAiFunc(token,cluster,modeluuid,policyName,opai_func_dict_
 
     
     if 'performance' in opai_func_dict['query_type']:
-        print(f"   ...querying ACME model performance endpoint")
+        print(f"   ...querying platform model performance endpoint")
         df_type = 'perfHist'
         pH = pd.json_normalize(json.loads(get_model_perf(modeluuid, token, cluster))).reset_index(drop=True)
         
@@ -2536,7 +2536,7 @@ def generate_metrics_opAiFunc(token,cluster,modeluuid,policyName,opai_func_dict_
         datetime_column = 'formatted_predict_date'
         
     elif 'drift' in opai_func_dict['query_type']:
-        print(f"   ...querying ACME drift detection endpoint")        
+        print(f"   ...querying platform drift detection endpoint")        
         df_type = 'driftHist'
         #print(f"policy: {policyName}")
         df = get_drift_hist(modeluuid, token, cluster, policyName)
