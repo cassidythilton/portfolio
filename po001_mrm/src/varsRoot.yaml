@@ -1,4 +1,4 @@
-WEBSERVICES_URL: https://webservices.dev1691613641.acme.info
+WEBSERVICES_URL: <YOUR_WEBSERVICES_URL>
 allcolumns:
 - customer_id
 - terminal_id
@@ -30,7 +30,7 @@ categoricalcolumns:
 - transaction_cat
 - transaction_subcat
 - transaction_subsubcat
-connection: clickhouse://default:@clickhouse/defaultz
+connection: <YOUR_DB_CONNECTION_STRING>
 continuouscolumns:
 - customer_id
 - terminal_id
@@ -52,24 +52,23 @@ continuouscolumns:
 - terminal_id_nb_tx_30day_window
 - terminal_id_risk_30day_window
 - tx_fraud_pred_proba
-deployment: databr_eval_5b7b04e_nc_plch
-deployment_name: databr_eval_5b7b04e_nc_plch
+deployment: <YOUR_DEPLOYMENT_NAME>
+deployment_name: <YOUR_DEPLOYMENT_NAME>
 experiment_type: classification
-featureset: databr_eval_5b7b04e_nc_plch_1_fs
-featureset_name: databr_eval_5b7b04e_nc_plch_1_fs
+featureset: <YOUR_FEATURESET_NAME>
+featureset_name: <YOUR_FEATURESET_NAME>
 identifier_col: tx_id
 datetime_col: tx_datetime
-model: databr_eval_5b7b04e_nc_plch
-model_name: databr_eval_5b7b04e_nc_plch
+model: <YOUR_MODEL_NAME>
+model_name: <YOUR_MODEL_NAME>
 model_stage: primary
 model_version: '1'
 offset_col: tx_datetime
 predict_proba_col: tx_fraud_pred_proba
-project_name: databr_project_cert_cassidyh
+project_name: <YOUR_PROJECT_NAME>
 str_categorical_cols:
 - tx_id
 - transaction_cat
 - transaction_subcat
 - transaction_subsubcat
 targetcolumn: tx_fraud
-

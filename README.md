@@ -1,177 +1,147 @@
-# Portfolio Repository
+# Portfolio — Machine Learning & Software Engineering
 
-## Introduction
-
-This repository is a collection of projects showcasing my skills in Machine Learning and Software Development. Each project is structured to provide an overview, problem statement, solution approach, technologies used, and performance metrics.
+A curated collection of end-to-end machine learning projects demonstrating applied AI in financial services and real estate. Each project spans the full development lifecycle—from problem framing and model architecture through deployment infrastructure and production monitoring.
 
 ---
 
 ## Table of Contents
 
-1. [po001_mrm](#po001_mrm) ⸺ [🔗 Project Repo](https://github.com/cassidythilton/portfolio/tree/main/po001_mrm)
-2. [po002_hou](#po002_hou) ⸺ [🔗 Project Repo](https://github.com/cassidythilton/portfolio/tree/main/po002_hou)
+| # | Project | Domain | Key Technologies |
+|---|---------|--------|-----------------|
+| 1 | [po001_mrm — Automated Model Risk Management Reports](#po001_mrm--automated-model-risk-management-reports) | Financial Services | GPT-4, Python, MLOps, HTML |
+| 2 | [po002_hou — Home Price Prediction Engine](#po002_hou--home-price-prediction-engine) | Real Estate | CNN, MLP, FastAPI, Streamlit, MLflow |
 
 ---
 
-## po001_mrm
+## po001_mrm — Automated Model Risk Management Reports
 
 ### Overview
 
-The `po001_mrm` project focuses on automating the creation of model risk management reports in the financial services sector. It leverages the capabilities of ChatGPT-4 for text generation and completion, along with a custom application that performs specific query operations. 
+An automated report generation pipeline for Model Risk Management (MRM) in financial services. The system ingests an MRM template document, parses each section's analytical requirements using GPT-4 function calling, executes the appropriate data retrieval and computation tasks against an MLOps platform, and assembles a fully rendered HTML report—reducing what was previously a multi-FTE manual process to a single notebook execution.
 
-### Problem Statement
+### Problem
 
-Manual generation of model risk management reports can be labor-intensive and error-prone. These reports require a deep understanding of both machine learning models and financial metrics.
+MRM reports are a regulatory obligation under [SR 11-7](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm) (Board of Governors of the Federal Reserve System / OCC). They require cross-referencing model performance metrics, feature drift statistics, segment-level analyses, and training metadata across quarters. Producing them manually is labor-intensive, error-prone, and difficult to standardize across teams.
 
-### Solution Approach
-
-This project employs a pipeline where text requests from a model risk management report template are processed as queries or function calls. These queries fetch required variables, which are then summarized by ChatGPT-4. The project is comprised of notebook `AutoRiskReport_FinancialServices.ipynb` and helper file `helperMRM.py`. The notebook serves as the front end for the user whereas the helper file serves as the back end. The user will provide an MRM template with requests for specific information to be automated into individual sections (e.g. _"analyze model performance metrics for the current ended quarter (2023-01-01 to 2023-03-31) comparing to the prior ended quarter (2022-10-01 to 2022-12-31)"._ The solution reads and parses each request and then performs the appropriate tasks to accomodate each request. Finally, once complete an "out" file is rendered in the same `src` location as the template files. 
-
-<div style="text-align:center">
-    <img src="https://drive.google.com/uc?export=view&id=1P-eHM2_z1wHfrq-WQEb3Z9gTyW2h52c6">
-<br>
-</div>  
-
-### Technologies Used
-
-- ChatGPT-4
-- Python
-- HTML
-- Custom MLOps platform
-
-### Code Sample: Task Identification and Querying
-
-```python
-def chat_with_model_tasks_opAiFuncN(analysisRequest, i, tokens=1000, temperature=0.05, max_retries=3):
-    """
-    Function to determine the most appropriate task for a given analysis request using OpenAI's GPT-4.
-    
-    Parameters:
-    - analysisRequest: A text request specifying the desired analysis from MRM template.
-    - i: Request index.
-    - tokens, temperature: GPT-4 configurations.
-    - max_retries: Maximum number of retry attempts.
-    
-    Returns:
-    - A dictionary containing task details.
-    """
-    
-    openai.api_key = setOpenAItoken(cluster, token) 
-    retry_count = 0
-    today = datetime.today().strftime('%Y-%m-%d')
-    
-    while retry_count <= max_retries:
-        try:
-            # Sample task list and request
-            sysTasks = "Retrieve model performance, Retrieve feature drift."
-            textRequest = f'You receive a request to "{analysisRequest}". Which task should be performed?'
-
-            message_objs = [{'role': 'system', 'content': 'You are a data analyst.'}, {'role': 'user', 'content': sysTasks}, {'role': 'user', 'content': textRequest}]
-            
-            # Call to GPT-4
-            response = openai.ChatCompletion.create(model="gpt-4", messages=message_objs, max_tokens=tokens, temperature=temperature)
-            task_response = response.choices[0].message['content']
-            
-            print(f"Identified task: {task_response}")
-            specificDates = f"Today's date is {today}."            
-            message_objs.append({'role': 'user', 'content': specificDates})
-
-            # ...
-            
-            if task_response:  # Placeholder condition
-                return {"task": task_response}
-            
-            retry_count += 1
-            
-        except Exception as e:
-            retry_count += 1
-            print(f"Error: {e}")
-            time.sleep(2)
-
-    print("Max retry attempts reached.")
-    return None
+### Solution Architecture
 
 ```
+┌──────────────────┐     ┌────────────────┐     ┌──────────────────┐
+│  MRM Template    │────▸│  GPT-4 Task    │────▸│  MLOps Platform  │
+│  (HTML)          │     │  Router        │     │  API Queries     │
+└──────────────────┘     └────────────────┘     └──────────────────┘
+                                                        │
+                              ┌──────────────────────────┘
+                              ▼
+                     ┌────────────────┐     ┌──────────────────┐
+                     │  Metrics       │────▸│  GPT-4           │
+                     │  Aggregation   │     │  Summarization   │
+                     └────────────────┘     └──────────────────┘
+                                                    │
+                                                    ▼
+                                           ┌────────────────┐
+                                           │  Rendered MRM  │
+                                           │  Report (HTML) │
+                                           └────────────────┘
+```
 
-### Results
-The project has shown promising results in reducing the time and complexity of generating comprehensive model risk management reports saving impressive amounts of manual work across multiple FTE's. 
+1. **Template Parsing** — The HTML-based MRM template contains annotated sections with natural-language requests (e.g., *"analyze model performance metrics for Q1 2023 vs. Q4 2022"*).
+2. **Task Routing** — GPT-4 with function calling identifies the correct analytical task (performance retrieval, drift detection, segment analysis, etc.) for each request.
+3. **Data Retrieval** — The system queries the MLOps platform APIs for model performance history, feature drift metrics, segment policies, and training metadata (via MLflow / Databricks).
+4. **Summarization & Rendering** — Metrics are aggregated, contextualized by GPT-4 against SR 11-7 guidelines, and inserted into the final HTML report with embedded visualizations.
 
-### Conclusion
-The po001_mrm project successfully demonstrates how GenerativeAI and Large Language Models can be synergistically combined with traditional data querying mechanisms to optimize the generation of model risk management reports.
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `AutoRiskReport_FinancialServices.ipynb` | Primary notebook — user-facing entry point |
+| `helperMRM.py` | Backend module — API integrations, metrics computation, report generation |
+| `src/vars.yaml` | Configuration — model, deployment, and feature column definitions |
+
+### Technologies
+
+- **GPT-4** — Task classification via function calling; narrative summarization of quantitative metrics
+- **Python** — Core language (pandas, NumPy, scikit-learn, plotly, pyecharts)
+- **MLflow / Databricks** — Model registry, training metrics, artifact management
+- **HTML/CSS** — Report template and rendered output format
 
 ---
-## po002_hou
+
+## po002_hou — Home Price Prediction Engine
 
 ### Overview
 
-The `po002_hou` project focuses on predicting home prices using machine learning techniques, combining both image and numerical data. The solution features a Streamlit app that allows users to input parameters such as square footage, number of baths, and an image of the property to predict its value. It leverages two types of neural networks: a Convolutional Neural Network (CNN) for image analysis and a Multilayer Perceptron (MLP) for numerical analysis.
+A multi-modal home price prediction system that combines property imagery with structured numerical features (square footage, bedrooms, bathrooms, location) using a dual-branch neural network. The system is served through a Streamlit front end backed by a FastAPI inference API, with full experiment tracking via MLflow.
 
-### Problem Statement
+### Problem
 
-Determining an accurate and fair price for a home involves considering multiple factors, which can be both laborious and subjective. Real estate professionals and homeowners alike need an automated, unbiased solution for home valuation.
+Home valuation is traditionally subjective and time-consuming, relying heavily on manual appraisals. An automated, data-driven approach that incorporates both visual and tabular property characteristics can provide faster, more consistent, and less biased estimates.
 
-### Solution Approach
-
-The project employs a two-pronged approach combining image and numerical data to predict home prices. The Streamlit app collects user inputs which are sent to a FastAPI backend for processing as well as MLFlow for artifact logging and monitoring. The neural networks provide their independent analysis, which is then merged into a final layer to output the home's estimated value. Moreover, the system identifies four comparable homes to provide additional context for the user.
-
-<div style="text-align:center">
-    <img src="https://drive.google.com/uc?export=view&id=1PMdTgx-37RRg6Kp-cF5EkInkurxPbMKX">
-<br>
-</div>
-
-### Technologies Used
-
-- Streamlit
-- FastAPI
-- MLFlow
-- Python
-- Convolutional Neural Networks (CNN)
-- Multilayer Perceptron (MLP)
-
-### Code Sample: FastAPI Prediction Endpoint
-
-```python
-@app.post("/predict/")
-async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float = Form(...), sqft: float = Form(...), file: UploadFile = File(...)):
-
-    tabular_data = np.array([[n_citi, bed, bath, sqft]])
-    tabular_data = tabular_data / np.array([citiM, bM, bathM, sqftM])  # Normalize like you did during training
-
-    image_data = await file.read()
-    image = cv2.imdecode(np.frombuffer(image_data, np.uint8), -1)
-    image = cv2.resize(image, (64, 64))
-    image = image / 255.0
-    image = np.expand_dims(image, axis=0)
-    prediction = model.predict([tabular_data, image])
-
-    return {"prediction": float(prediction[0]*priceM)}  
+### Solution Architecture
 
 ```
+┌──────────────────┐     ┌────────────────────────────────────┐
+│  Streamlit UI    │────▸│         FastAPI Backend             │
+│  (User Inputs)   │     │                                    │
+└──────────────────┘     │  ┌──────────┐    ┌──────────────┐  │
+                         │  │ CNN      │    │ MLP          │  │
+                         │  │ (Image)  │    │ (Numerical)  │  │
+                         │  └────┬─────┘    └──────┬───────┘  │
+                         │       └──────┬──────────┘          │
+                         │              ▼                     │
+                         │     ┌────────────────┐             │
+                         │     │  Merged Dense  │             │
+                         │     │  Layer → Price │             │
+                         │     └────────────────┘             │
+                         └────────────────────────────────────┘
+                                        │
+                                        ▼
+                              ┌──────────────────┐
+                              │  MLflow Tracking  │
+                              │  (Experiments,    │
+                              │   Artifacts)      │
+                              └──────────────────┘
+```
 
+1. **Image Branch (CNN)** — A 3-layer convolutional network (16 → 32 → 64 filters) processes 64×64 property images to extract visual features.
+2. **Numerical Branch (MLP)** — A 2-layer dense network processes normalized tabular features (city code, beds, baths, sqft).
+3. **Fusion Layer** — Both branch outputs are concatenated and passed through a final dense layer to produce the price estimate.
+4. **Comparable Homes** — The system identifies the 4 nearest properties by Euclidean distance in feature space, providing context alongside the prediction.
 
-### FastAPI
-FastAPI is a modern, high-performance web framework for building APIs with Python. In this home pricing prediction solution, FastAPI serves as the backbone for managing all API calls, specifically for handling prediction requests. When the Streamlit app gathers information about a property, such as square footage, number of bedrooms, and an image, it sends this data to a FastAPI endpoint. The endpoint then invokes the underlying machine learning model, which consists of a Convolutional Neural Network (CNN) for image analysis and a Multilayer Perceptron (MLP) for numerical data processing. The FastAPI application ensures that these operations are executed in a fast, efficient, and secure manner. Its benefits include automatic generation of OpenAPI documentation, validation of incoming requests, and support for concurrent handling of multiple requests, making it an ideal choice for building robust and scalable machine learning APIs.
+### Key Files
 
-<div style="text-align:center">
-    <img src="https://drive.google.com/uc?export=view&id=1HUa6tvprIA1NXmuNfCGP4v1e9WCIRQmZ" width="1000">
-</div>
+| File | Purpose |
+|------|---------|
+| `House Price Predictions.ipynb` | Model training notebook — CNN/MLP architecture, data preprocessing, MLflow logging |
+| `app.py` | FastAPI inference API — serves model predictions |
+| `str.py` | Streamlit application — user interface with image upload and comparable homes |
+| `helper.py` | Utility functions — data loading, model architecture definitions, visualization |
+| `src/homePrices.csv` | Training dataset — property attributes and prices |
 
-### MLFlow
-MLflow plays a crucial role in the management and tracking of machine learning models in this solution. It is responsible for logging various aspects of the model such as parameters, metrics, and artifacts. When the home price prediction model is trained using the Jupyter Notebook, metrics like accuracy, loss, and other performance indicators are logged into MLflow. These logs serve as an invaluable resource for understanding model behavior, debugging, and iterative development. MLflow's user interface also allows for the easy comparison of different model versions, thus assisting in model selection. The artifact logging feature is particularly beneficial for keeping track of the trained models, making it straightforward to roll back to a previous model version if needed. Overall, MLflow enhances the traceability and reproducibility of machine learning projects.
+### Technologies
 
-<div style="text-align:center">
-    <img src="https://drive.google.com/uc?export=view&id=1KhJY0O5iFozWcyB0GAMYReffkohZyJBn" width="1000">
-</div>
+- **TensorFlow / Keras** — CNN and MLP model architectures
+- **FastAPI** — High-performance async inference API
+- **Streamlit** — Interactive front-end for property valuation
+- **MLflow** — Experiment tracking, model versioning, artifact logging
+- **OpenCV** — Image preprocessing and resizing
 
-### Streamlit
-Streamlit serves as the front-end interface for this solution, creating an intuitive environment for users to engage with the machine learning model. Users can easily input property-specific details such as square footage and the number of bathrooms, as well as upload images for more accurate predictions. These inputs are seamlessly routed to the FastAPI backend for processing. An additional feature of this application is its ability to not only predict the value of a property but also present data on four comparable homes, offering extra context to the estimated price. While Flask is often considered more robust for large-scale applications requiring complex customization, Streamlit excels in situations where rapid development and ease of use are prioritized. Its straightforward widgetry and compatibility with other technologies like FastAPI make it a highly effective tool for crafting user interfaces in machine learning projects.
+---
 
-<div align="center">
-  <a href="https://drive.google.com/file/d/10pAADAGK6zB5AoUJNpA6uW9xLwWK6xdL/view?t=3s"><img src="https://drive.google.com/uc?export=view&id=1QaASEvndCqhkSg1O0qaSh7s_tnfiWs7Y" width="700"></a>
-</div>
+## Setup & Configuration
 
-### Conclusion
-The po002_hou project successfully employs machine learning techniques, specifically neural networks, to automate and optimize home price predictions. This approach not only increases efficiency but also adds a layer of objectivity to the valuation process.
+### Prerequisites
 
+- Python 3.9+
+- See individual project directories for specific dependency requirements
 
+### Configuration
 
+- **po001_mrm**: Update `src/vars.yaml` with your platform credentials, model names, and connection details before running.
+- **po002_hou**: Ensure the training data (`src/homePrices.csv`) and trained model (`src/housePrices.h5`) are present in the `po002_hou/src/` directory.
+
+---
+
+## License
+
+This repository is provided for portfolio and demonstration purposes.

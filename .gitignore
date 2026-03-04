@@ -1,0 +1,47 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.env
+.env.*
+*.env
+.venv/
+venv/
+env/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Model artifacts (large binary files)
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+*.pb
+saved_model/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Credentials / Secrets
+*.pem
+*.key
+*.cert

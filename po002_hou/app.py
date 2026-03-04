@@ -5,7 +5,7 @@ import cv2
 import io
 
 app = FastAPI()
-model = load_model('/Users/cassidyhilton/Documents/Vian_Notebooks_Pers/portfolio/po002_hou/src/housePrices.h5')
+model = load_model('src/housePrices.h5')
 
 @app.post("/predict/")
 async def predict(n_citi: float = Form(...), bed: float = Form(...), bath: float = Form(...), sqft: float = Form(...), file: UploadFile = File(...)):

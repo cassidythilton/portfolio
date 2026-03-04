@@ -14,8 +14,8 @@ def calculate_similarity(row, user_input):
     row_values = row[['n_citi', 'bed', 'bath', 'sqft']].values
     return distance.euclidean(row_values, user_input)
 
-df=pd.read_csv('/Users/cassidyhilton/Documents/Vian_Notebooks_Pers/portfolio/po002_hou/src/homePrices.csv')
-model = load_model('/Users/cassidyhilton/Documents/Vian_Notebooks_Pers/portfolio/po002_hou/src/housePrices.h5')
+df=pd.read_csv('src/homePrices.csv')
+model = load_model('src/housePrices.h5')
 
 #st.set_page_config(page_title="Home Price Predictor", layout='wide')
 #st.title('Home Price Predictor')

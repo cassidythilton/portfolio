@@ -1,4 +1,4 @@
-WEBSERVICES_URL: https://webservices.dev1691613641.acme.info
+WEBSERVICES_URL: <YOUR_WEBSERVICES_URL>
 allcolumns:
 - customer_id
 - terminal_id
@@ -30,7 +30,7 @@ categoricalcolumns:
 - transaction_cat
 - transaction_subcat
 - transaction_subsubcat
-connection: clickhouse://default:@clickhouse/default
+connection: <YOUR_DB_CONNECTION_STRING>
 continuouscolumns:
 - customer_id
 - terminal_id
@@ -61,19 +61,19 @@ custom_metrics_class:
 - None
 - None
 datetime_col: tx_datetime
-deployment: cc_fraud_model_p46
-deployment_name: cc_fraud_model_p46
+deployment: <YOUR_DEPLOYMENT_NAME>
+deployment_name: <YOUR_DEPLOYMENT_NAME>
 experiment_type: classification
-featureset: cc_fraud_model_p46_featureset
-featureset_name: cc_fraud_model_p46_featureset
+featureset: <YOUR_FEATURESET_NAME>
+featureset_name: <YOUR_FEATURESET_NAME>
 identifier_col: tx_id
-model: cc_fraud_model_p46
-model_name: cc_fraud_model_p46
+model: <YOUR_MODEL_NAME>
+model_name: <YOUR_MODEL_NAME>
 model_stage: primary
 model_version: '1'
 offset_col: tx_datetime
 predict_proba_col: tx_fraud_pred_proba
-project_name: cassidyh_project_matrx
+project_name: <YOUR_PROJECT_NAME>
 str_categorical_cols:
 - tx_id
 - transaction_cat
@@ -95,4 +95,4 @@ train_cols:
 - terminal_id_risk_7day_window
 - terminal_id_nb_tx_30day_window
 - terminal_id_risk_30day_window
-username: cassidyh
+username: <YOUR_USERNAME>
